@@ -64,7 +64,7 @@ function drawBall(){
      * bricks
      */
     if (ball_y > rect_y){
-        if (ball_x > rect_x && ball_x < rect_x + rect_width){
+        if (ball_x > rect_x - rect_width/2 && ball_x < rect_x - rect_width/2 + rect_width){
             ball_dy = -ball_dy;
         }
     }
