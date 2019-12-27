@@ -59,6 +59,15 @@ function drawBall(){
         ball_dx = -ball_dx;
     }
 
+    /**
+     * TODO: create universal collision detection for use of destructible
+     * bricks
+     */
+    if (ball_y > rect_y){
+        if (ball_x > rect_x && ball_x < rect_x + rect_width){
+            ball_dy = -ball_dy;
+        }
+    }
 }
 
 function drawScore(){
