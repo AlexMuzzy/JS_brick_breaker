@@ -1,4 +1,5 @@
-import object, * as objects from "./objects/game_objects.js"
+import object from "./objects/object.js"
+import ball from "./objects/ball_object.js";
 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
@@ -9,7 +10,7 @@ ctx.canvas.height = canvasHeight;
 /**
  * ball values
  */
-var ball = new object(50, canvasWidth/2, "#FFF", "circle", {radius: 10, arc: Math.PI * 2}, {dx: 10, dy: 10}, ctx);
+var ball_object = new ball(50, canvasWidth/2, "#FFF", "circle", {radius: 10, arc: Math.PI * 2}, {dx: 10, dy: 10}, ctx);
 /**
  * rectangle paddle values
  */
@@ -40,35 +41,32 @@ function drawPaddle() {
 }
 
 function drawBall() {
-    // ctx.beginPath();
-    // ctx.fillStyle = ballColour;
-    // ctx.arc(ball_x, ball_y, ballRadius, 0, Math.PI * 2);
-    // ctx.fill();
-    // ctx.closePath();
-    console.log(ball.x);
-    ball.x += ball_dx;
-    ball_y += ball_dy;
 
+    ball_object.draw();
+
+    ball_object.x += ball_object.direction.dx;
+    ball_object.y += ball_object.direction.dy;
+    
     /**
      * below bounce rules implementation for ball (simply negating the values)
      */
-    if (ball_y < ballRadius || ball_y + ball_dy > canvas.height - ballRadius) {
-        ball_dy = -ball_dy;
-    }
+    // if (ball_y < ballRadius || ball_y + ball_dy > canvas.height - ballRadius) {
+    //     ball_dy = -ball_dy;
+    // }
 
-    if (ball_x < ballRadius || ball_x + ball_dx > canvas.width - ballRadius) {
-        ball_dx = -ball_dx;
-    }
+    // if (ball_x < ballRadius || ball_x + ball_dx > canvas.width - ballRadius) {
+    //     ball_dx = -ball_dx;
+    // }
 
     /**
      * TODO: create universal collision detection for use of destructible
      * bricks
      */
-    if (ball_y > rect_y) {
-        if (ball_x > rect_x - rect_width / 2 && ball_x < rect_x - rect_width / 2 + rect_width) {
-            ball_dy = -ball_dy;
-        }
-    }
+    // if (ball_y > rect_y) {
+    //     if (ball_x > rect_x - rect_width / 2 && ball_x < rect_x - rect_width / 2 + rect_width) {
+    //         ball_dy = -ball_dy;
+    //     }
+    // }
 }
 
 function drawScore() {
@@ -80,9 +78,9 @@ function drawScore() {
     /** 
      * /score reset if hit bottom of canvas (had to set threshold slightly higher since it does not work without it
      */
-    if (ball_y + ball_dy > canvas.height - ballRadius - 20) {
-        score = 0;
-    }
+    // if (ball_y + ball_dy > canvas.height - ballRadius - 20) {
+    //     score = 0;
+    // }
 }
 
 function keyboardController() {

@@ -17,22 +17,5 @@ export default class object {
         this.dimensions = dimensions;
         this.direction = direction;
         this.ctx = ctx;
-        ctx.beginPath();
-        ctx.fillstyle = colour;
-        if (shape == "circle"){
-            ctx.arc(this.x, this.y, this.dimensions.radius, 0, this.dimensions.arc);
-        }
-        else if (shape == "square"){
-            ctx.fillRect(this.x, this.y, this.dimensions.width, this.dimensions.height);
-        }
-        else {
-            console.log("Shape not detected.");
-        }
-        ctx.fill();
-        ctx.closePath();
     }
-
-
-
-
 }
