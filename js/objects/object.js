@@ -13,7 +13,6 @@ export default class object {
         this.x = x;
         this.y = y;
         this.colour = colour;
-        this.shape = shape;
         this.dimensions = dimensions;
         this.direction = direction;
         this.ctx = ctx;

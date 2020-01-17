@@ -1,5 +1,5 @@
-import object from "./objects/object.js"
 import ball from "./objects/ball_object.js";
+import square from "./objects/square_object.js";
 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
@@ -10,17 +10,28 @@ ctx.canvas.height = canvasHeight;
 /**
  * ball values
  */
-var ball_object = new ball(50, canvasWidth/2, "#FFF", "circle", {radius: 10, arc: Math.PI * 2}, {dx: 10, dy: 10}, ctx);
+var ball_object = new ball(
+        50,
+        canvasWidth/2,
+        "#FFF",
+        {radius: 10, arc: Math.PI * 2},
+        {dx: 10, dy: 10},
+        ctx
+    );
+
 /**
  * rectangle paddle values
  */
-var rect_dx = 15;
-var rect_x = canvasWidth / 2;
-var rect_y = canvasHeight - 100;
-var rect_width = 150;
-var rect_height = 20;
-var rightPressed = false;
-var leftPressed = false;
+
+var paddle_object = new square(
+        canvasWidth / 2,
+        canvasHeight - 100,
+        "#F00",
+        {width: 150, height: 20},
+        {leftPressed: false, rightPressed: false},
+        ctx
+    );
+
 var score = 0;
 
 /**
@@ -34,19 +45,13 @@ function objectLogic() {
 }
 
 function drawPaddle() {
-    ctx.beginPath();
-    ctx.fillStyle = "#F00";
-    ctx.fillRect(rect_x - rect_width / 2, rect_y, rect_width, rect_height);
-    ctx.closePath();
+    paddle_object.square_object_draw();
+
 }
 
 function drawBall() {
 
-    ball_object.draw();
-
-    ball_object.x += ball_object.direction.dx;
-    ball_object.y += ball_object.direction.dy;
-    
+    ball_object.ball_object_draw();    
     /**
      * below bounce rules implementation for ball (simply negating the values)
      */
