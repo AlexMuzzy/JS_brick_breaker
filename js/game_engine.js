@@ -11,14 +11,12 @@ ctx.canvas.height = canvasHeight;
  * ball values
  */
 var ball_object = new ball(
-        50,
         canvasWidth/2,
+        canvasHeight/2,
         "#FFF",
         {radius: 10, arc: Math.PI * 2},
-        {dx: 10, dy: 10},
-        ctx,
-        0,
-        0
+        {dx: 15, dy: 15},
+        ctx
     );
 
 /**
@@ -30,9 +28,8 @@ var paddle_object = new square(
         canvasHeight - 100,
         "#F00",
         {width: 150, height: 20},
-        {leftPressed: false, rightPressed: false},
-        ctx,
-        15
+        {leftPressed: false, rightPressed: false, dx: 15},
+        ctx
     );
 
 var score = 0;
@@ -43,47 +40,71 @@ var score = 0;
  */
 
 function objectLogic() {
-    
     drawPaddle();
     drawScore();
     drawBall();
-    paddle_object.move_paddle();
 }
 
 function drawPaddle() {
-    console.log(paddle_object);
-    
-    ctx.beginPath();
-    ctx.fillStyle = "#F00";
-    ctx.closePath();
-
     paddle_object.square_object_draw();
-
 }
 
 function drawBall() {
 
     ball_object.ball_object_draw();    
     /**
-     * below bounce rules implefmentation for ball (simply negating the values)
+     * below bounce rules implementation for ball (simply negating the values)
      */
-    // if (ball_y < ballRadius || ball_y + ball_dy > canvas.height - ballRadius) {
-    //     ball_dy = -ball_dy;
-    // }
+    if (ball_object.y < ball_object.dimensions.radius || ball_object.y + ball_object.direction.dy > canvas.height - ball_object.dimensions.radius) {
+        ball_object.direction.dy = -ball_object.direction.dy;
+    }
 
-    // if (ball_x < ballRadius || ball_x + ball_dx > canvas.width - ballRadius) {
-    //     ball_dx = -ball_dx;
-    // }
+    if (ball_object.x < ball_object.dimensions.radius || ball_object.x + ball_object.direction.dx > canvas.width - ball_object.dimensions.radius) {
+        ball_object.direction.dx = -ball_object.direction.dx;
+    }
 
     /**
      * TODO: create universal collision detection for use of destructible
      * bricks
      */
-    // if (ball_y > rect_y) {
-    //     if (ball_x > rect_x - rect_width / 2 && ball_x < rect_x - rect_width / 2 + rect_width) {
-    //         ball_dy = -ball_dy;
-    //     }
-    // }
+    if (ball_object.y > paddle_object.y) {
+        if (ball_object.x > paddle_object.x - paddle_object.dimensions.width / 2 && ball_object.x < paddle_object.x - paddle_object.dimensions.width / 2 + paddle_object.dimensions.width) {
+            ball_object.direction.dy = -ball_object.direction.dy;
+        }
+    }
+
+    /**
+     * point to show where value from if statement above is referencing to.
+     * left side point
+     * 
+     */
+    ctx.beginPath();
+    ctx.fillStyle = "#FFF";
+    ctx.arc(paddle_object.x - paddle_object.dimensions.width / 2, paddle_object.y, 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+
+    /**
+     * 
+     * right side point
+     */
+
+    ctx.beginPath();
+    ctx.fillStyle = "#FFF";
+    ctx.arc(paddle_object.x - paddle_object.dimensions.width / 2 + paddle_object.dimensions.width, paddle_object.y, 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+
+    /**
+     * 
+     * point of x and y coordinate of ball
+     */
+    ctx.beginPath();
+    ctx.fillStyle = "#0F0";
+    ctx.arc(ball_object.x, ball_object.y, 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+
 }
 
 function drawScore() {
