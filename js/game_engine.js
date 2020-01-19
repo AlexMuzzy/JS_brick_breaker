@@ -95,27 +95,36 @@ function keyboardController() {
 
     function keyDownHandler(e) {
         if (e.key == "Right" || e.key == "ArrowRight") {
-            rightPressed = true;
+            paddle_object.direction.rightPressed = true;
         } else if (e.key == "Left" || e.key == "ArrowLeft") {
-            leftPressed = true;
+            paddle_object.direction.leftPressed = true;
         }
     }
 
     function keyUpHandler(e) {
         if (e.key == "Right" || e.key == "ArrowRight") {
-            rightPressed = false;
+            paddle_object.direction.rightPressed = false;
         } else if (e.key == "Left" || e.key == "ArrowLeft") {
-            leftPressed = false;
+            paddle_object.direction.leftPressed = false;
         }
     }
 
-    if (leftPressed && rect_x < canvasWidth) {
+
+    /**
+     * TODO: implement this within the OOP scope of the paddle object
+     * 
+     *     if (leftPressed && rect_x < canvasWidth) {
         rect_x += -rect_dx;
     }
 
     if (rightPressed) {
         rect_x += rect_dx;
     }
+     * 
+     * 
+     * 
+     * 
+     */
 }
 
 /**
