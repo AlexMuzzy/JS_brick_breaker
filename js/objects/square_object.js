@@ -10,4 +10,13 @@ export default class square extends object {
         this.ctx.fill();
         this.ctx.closePath();
     }
+
+    move_paddle(){
+        if (this.direction.leftPressed && this.x > 0) {
+            this.x += -this.dx;
+        }
+        if(this.direction.rightPressed && this.x < this.ctx.canvas.width - this.dimensions.width){
+            this.x += this.dx;
+        }
+    }
 }

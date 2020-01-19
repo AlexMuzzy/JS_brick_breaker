@@ -9,12 +9,14 @@
  * @param ctx context passed
  */
 export default class object {
-    constructor(x, y, colour, shape, dimensions, direction, ctx){
+    constructor(x, y, colour, dimensions, direction, ctx, dx, dy){
         this.x = x;
         this.y = y;
         this.colour = colour;
         this.dimensions = dimensions;
         this.direction = direction;
         this.ctx = ctx;
+        this.dx =dx;
+        this.dy = dy;
     }
 }

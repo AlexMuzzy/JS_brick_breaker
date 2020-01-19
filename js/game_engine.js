@@ -16,7 +16,9 @@ var ball_object = new ball(
         "#FFF",
         {radius: 10, arc: Math.PI * 2},
         {dx: 10, dy: 10},
-        ctx
+        ctx,
+        0,
+        0
     );
 
 /**
@@ -29,22 +31,32 @@ var paddle_object = new square(
         "#F00",
         {width: 150, height: 20},
         {leftPressed: false, rightPressed: false},
-        ctx
+        ctx,
+        15
     );
 
 var score = 0;
+
 
 /**
  * all objects spawned, along with their associated logic goes here.
  */
 
 function objectLogic() {
+    
     drawPaddle();
-    drawBall();
     drawScore();
+    drawBall();
+    paddle_object.move_paddle();
 }
 
 function drawPaddle() {
+    console.log(paddle_object);
+    
+    ctx.beginPath();
+    ctx.fillStyle = "#F00";
+    ctx.closePath();
+
     paddle_object.square_object_draw();
 
 }
@@ -53,7 +65,7 @@ function drawBall() {
 
     ball_object.ball_object_draw();    
     /**
-     * below bounce rules implementation for ball (simply negating the values)
+     * below bounce rules implefmentation for ball (simply negating the values)
      */
     // if (ball_y < ballRadius || ball_y + ball_dy > canvas.height - ballRadius) {
     //     ball_dy = -ball_dy;
@@ -98,6 +110,7 @@ function keyboardController() {
             paddle_object.direction.rightPressed = true;
         } else if (e.key == "Left" || e.key == "ArrowLeft") {
             paddle_object.direction.leftPressed = true;
+            
         }
     }
 

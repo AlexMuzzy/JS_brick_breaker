@@ -18,7 +18,7 @@ export default class ball extends object {
         /**
          * once ball is instiated, use this function to give the ball speed.
          */
-        ball_object.x += ball_object.direction.dx;
-        ball_object.y += ball_object.direction.dy;
+        this.x += this.direction.dx;
+        this.y += this.direction.dy;
     }
 }
