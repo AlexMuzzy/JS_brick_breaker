@@ -1,11 +1,11 @@
 
 /**
- * class for all objects drawn in game.
- * @param x x starting coordinates for object
- * @param y y starting coordinates for object
- * @param colour colour of object
- * @param dimensions dimensions of object as a record
- * @param ctx context passed
+ * Parent class for objects instaniated.
+ * @param {Number} x starting coordinates for object
+ * @param {Number} y starting coordinates for object
+ * @param {String} colour of object
+ * @param {Object} dimensions of object as a record
+ * @param {Object} ctx context passed from canvas API
  */
 export default class object {
     constructor(x, y, colour, dimensions, direction, ctx, dx, dy){

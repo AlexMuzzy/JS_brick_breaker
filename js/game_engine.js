@@ -1,6 +1,9 @@
 import ball from "./objects/ball_object.js";
 import square from "./objects/square_object.js";
 
+/**
+ * Setting up window and environment for Canvas API.
+ */
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var canvasHeight = window.innerHeight;
@@ -22,7 +25,6 @@ var ball_object = new ball(
 /**
  * rectangle paddle values
  */
-
 var paddle_object = new square(
         canvasWidth / 2,
         canvasHeight - 100,
@@ -32,6 +34,9 @@ var paddle_object = new square(
         ctx
     );
 
+/**
+ * Score value being set
+ */
 var score = 0;
 
 
@@ -45,7 +50,11 @@ function objectLogic() {
     drawBall();
 }
 
+/**
+ * Void function. Handles paddle object logic.
+ */
 function drawPaddle() {
+    paddle_object.move_paddle();
     paddle_object.square_object_draw();
 
     if (paddle_object.hasCollidedTopSide(ball_object.x, ball_object.y)){
@@ -55,10 +64,18 @@ function drawPaddle() {
     paddle_object.showSquarePoints();
 }
 
+/**
+ * Void function. Handles ball logic.
+ */
 function drawBall() {
+    ball_object.boundry_collision();
     ball_object.ball_object_draw();
+    ball_object.ball_object_speed();
 }
 
+/**
+ * Void function. Draws score on screen.
+ */
 function drawScore() {
     ctx.beginPath();
     ctx.fillText("score: " + score, canvasWidth - 200, 50);
@@ -73,6 +90,9 @@ function drawScore() {
     // }
 }
 
+/**
+ * Void function. Handles all keyboard input.
+ */
 function keyboardController() {
 
     /**
@@ -81,12 +101,11 @@ function keyboardController() {
      */
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
-    
+
     /**
      * handler for pressing the key down
-     * @param {*} e 
+     * @param {Object} e 
      */
-
     function keyDownHandler(e) {
         if (e.key == "Right" || e.key == "ArrowRight") {
             paddle_object.direction.rightPressed = true;
@@ -95,12 +114,11 @@ function keyboardController() {
             
         }
     }
-
+    
     /**
      * handler for pressing the key up
-     * @param {*} e 
+     * @param {Object} e 
      */
-
     function keyUpHandler(e) {
         if (e.key == "Right" || e.key == "ArrowRight") {
             paddle_object.direction.rightPressed = false;
@@ -123,7 +141,11 @@ function keyboardController() {
     are directly called, and separate. 
 */
 
-
+/**
+ * Void function. Main draw loop for game. Works by
+ * recursively calling the draw function with the 
+ * requestAnimationFrame().
+ */
 function draw() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     keyboardController();
