@@ -47,64 +47,16 @@ function objectLogic() {
 
 function drawPaddle() {
     paddle_object.square_object_draw();
-}
 
-function drawBall() {
-
-    ball_object.ball_object_draw();    
-    /**
-     * below bounce rules implementation for ball (simply negating the values)
-     */
-    if (ball_object.y < ball_object.dimensions.radius || ball_object.y + ball_object.direction.dy > canvas.height - ball_object.dimensions.radius) {
+    if (paddle_object.hasCollidedTopSide(ball_object.x, ball_object.y)){
         ball_object.direction.dy = -ball_object.direction.dy;
     }
 
-    if (ball_object.x < ball_object.dimensions.radius || ball_object.x + ball_object.direction.dx > canvas.width - ball_object.dimensions.radius) {
-        ball_object.direction.dx = -ball_object.direction.dx;
-    }
+    paddle_object.showSquarePoints();
+}
 
-    /**
-     * TODO: create universal collision detection for use of destructible
-     * bricks
-     */
-    if (ball_object.y > paddle_object.y) {
-        if (ball_object.x > paddle_object.x - paddle_object.dimensions.width / 2 && ball_object.x < paddle_object.x - paddle_object.dimensions.width / 2 + paddle_object.dimensions.width) {
-            ball_object.direction.dy = -ball_object.direction.dy;
-        }
-    }
-
-    /**
-     * point to show where value from if statement above is referencing to.
-     * left side point
-     * 
-     */
-    ctx.beginPath();
-    ctx.fillStyle = "#FFF";
-    ctx.arc(paddle_object.x - paddle_object.dimensions.width / 2, paddle_object.y, 2, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.closePath();
-
-    /**
-     * 
-     * right side point
-     */
-
-    ctx.beginPath();
-    ctx.fillStyle = "#FFF";
-    ctx.arc(paddle_object.x - paddle_object.dimensions.width / 2 + paddle_object.dimensions.width, paddle_object.y, 2, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.closePath();
-
-    /**
-     * 
-     * point of x and y coordinate of ball
-     */
-    ctx.beginPath();
-    ctx.fillStyle = "#0F0";
-    ctx.arc(ball_object.x, ball_object.y, 2, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.closePath();
-
+function drawBall() {
+    ball_object.ball_object_draw();
 }
 
 function drawScore() {
@@ -123,8 +75,17 @@ function drawScore() {
 
 function keyboardController() {
 
+    /**
+     * Event listener for both pressing the key down and pressing the key up
+     * 
+     */
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
+    
+    /**
+     * handler for pressing the key down
+     * @param {*} e 
+     */
 
     function keyDownHandler(e) {
         if (e.key == "Right" || e.key == "ArrowRight") {
@@ -135,6 +96,11 @@ function keyboardController() {
         }
     }
 
+    /**
+     * handler for pressing the key up
+     * @param {*} e 
+     */
+
     function keyUpHandler(e) {
         if (e.key == "Right" || e.key == "ArrowRight") {
             paddle_object.direction.rightPressed = false;
@@ -142,23 +108,6 @@ function keyboardController() {
             paddle_object.direction.leftPressed = false;
         }
     }
-
-
-    /**
-     * TODO: implement this within the OOP scope of the paddle object
-     * 
-     *     if (leftPressed && rect_x < canvasWidth) {
-        rect_x += -rect_dx;
-    }
-
-    if (rightPressed) {
-        rect_x += rect_dx;
-    }
-     * 
-     * 
-     * 
-     * 
-     */
 }
 
 /**
