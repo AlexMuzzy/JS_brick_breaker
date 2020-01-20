@@ -18,7 +18,7 @@ var ball_object = new ball(
         canvasHeight/2,
         "#FFF",
         {radius: 10, arc: Math.PI * 2},
-        {dx: 15, dy: 15},
+        {dx: 10, dy: 10},
         ctx
     );
 
@@ -39,11 +39,9 @@ var paddle_object = new square(
  */
 var score = 0;
 
-
 /**
  * all objects spawned, along with their associated logic goes here.
  */
-
 function objectLogic() {
     drawPaddle();
     drawScore();
@@ -56,8 +54,10 @@ function objectLogic() {
 function drawPaddle() {
     paddle_object.move_paddle();
     paddle_object.square_object_draw();
-
-    if (paddle_object.hasCollidedTopSide(ball_object.x, ball_object.y)){
+/**
+ * Check if either top or bottom side of paddle are colliding with ball.
+ */
+    if (paddle_object.hasCollidedTopSide(ball_object.x, ball_object.y) || paddle_object.hasCollidedBottomSide(ball_object.x, ball_object.y)){
         ball_object.direction.dy = -ball_object.direction.dy;
     }
 
@@ -68,9 +68,9 @@ function drawPaddle() {
  * Void function. Handles ball logic.
  */
 function drawBall() {
+    ball_object.ball_object_speed();
     ball_object.boundry_collision();
     ball_object.ball_object_draw();
-    ball_object.ball_object_speed();
 }
 
 /**

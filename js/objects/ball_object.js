@@ -43,4 +43,15 @@ export default class ball extends object {
             this.direction.dx = -this.direction.dx;
         }
     }
+
+/**
+ * Void function. Debug function using to help indicate where the x and y is located.
+ */
+    ball_object_point_draw () {
+        this.ctx.beginPath();
+        this.ctx.fillStyle = "#0F0";
+        this.ctx.arc(this.x, this.y, 2, 0, this.dimensions.arc);
+        this.ctx.fill();
+        this.ctx.closePath();
+    }
 }

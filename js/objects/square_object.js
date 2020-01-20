@@ -35,9 +35,10 @@ export default class square extends object {
     }
 
 /**
- * Boolean function. Tests to see if x and y coordinates given have collided with coordinates in object.
- * @param {number} x Coordinate for object tested for collision.
- * @param {number} y Coordinate for object tested for collision.
+ * Boolean function. Tests to see if x and y coordinates given have collided with coordinates in
+ * top side of square object.
+ * @param {Number} x Coordinate for object tested for collision.
+ * @param {Number} y Coordinate for object tested for collision.
  */
     hasCollidedTopSide (x, y) {
         if (y > this.y) {
@@ -49,14 +50,58 @@ export default class square extends object {
     }
 
 /**
+ * Boolean function. Tests to see if x and y coordinates given have collided with coordinates in 
+ * bottom side of square object.
+ * @param {Number} x Coordinate for object tested for collision.
+ * @param {Number} y Coordinate for object tested for collision.
+ */
+    hasCollidedBottomSide (x, y) {
+        if (y > this.y + this.dimensions.height) {
+            if (x > this.x && x < this.x + this.dimensions.width) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+/**
+ * Boolean function. Tests to see if x and y coordinates given have collided with coordinates in 
+ * left side of square object.
+ * @param {Number} x Coordinate for object tested for collision.
+ * @param {Number} y Coordinate for object tested for collision.
+ */
+    hasCollidedLeftSide (x, y) {
+        if (x > this.x){
+            if (y > this.y && y < this.y + this.dimensions.height) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+/**
+ * Boolean function. Tests to see if x and y coordinates given have collided with coordinates in 
+ * right side of square object.
+ * @param {Number} x Coordinate for object tested for collision.
+ * @param {Number} y Coordinate for object tested for collision.
+ */
+hasCollidedRightSide (x, y) {
+    if (x > this.x + this.dimensions.width){
+        if (y > this.y && y < this.y + this.dimensions.height) {
+            return true;
+        }
+    }
+    return false;
+}
+/**
  * Void function. Debug function to help test if object is being drawn properly 
  * by drawing a circle at each edge.
  */
     showSquarePoints () {
 
         /**
-         * left side point
          * 
+         * upper left side point
          */
         this.ctx.beginPath();
         this.ctx.fillStyle = "#FFF";
@@ -66,7 +111,7 @@ export default class square extends object {
 
         /**
          * 
-         * right side point
+         * upper right side point
          */
         this.ctx.beginPath();
         this.ctx.fillStyle = "#FFF";
@@ -86,7 +131,7 @@ export default class square extends object {
 
         /**
          * 
-         * lower left side point
+         * lower right side point
          */
         this.ctx.beginPath();
         this.ctx.fillStyle = "#FFF";
