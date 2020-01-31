@@ -85,14 +85,30 @@ export default class square extends object {
  * @param {Number} x Coordinate for object tested for collision.
  * @param {Number} y Coordinate for object tested for collision.
  */
-hasCollidedRightSide (x, y) {
-    if (x > this.x + this.dimensions.width){
-        if (y > this.y && y < this.y + this.dimensions.height) {
-            return true;
+    hasCollidedRightSide (x, y) {
+        if (x > this.x + this.dimensions.width){
+            if (y > this.y && y < this.y + this.dimensions.height) {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
+
+/**
+ * Boolean function. Tests to see if x and y coordinates given have collided with coordinates in
+ * any side of square object.
+ * @param {Number} x Coordinate for object tested for collision.
+ * @param {Number} y Coordinate for object tested for collision.
+ */
+    hasCollided (x, y) {
+        if (this.hasCollidedBottomSide(x, y) ||
+            this.hasCollidedLeftSide(x, y) ||
+            this.hasCollidedRightSide(x, y) ||
+            this.hasCollidedTopSide(x, y)) {
+                return true;
+        }
+        return false;
+    }
 /**
  * Void function. Debug function to help test if object is being drawn properly 
  * by drawing a circle at each edge.

@@ -8,7 +8,8 @@
  * @param {Object} ctx context passed from canvas API
  */
 export default class object {
-    constructor(x, y, colour, dimensions, direction, ctx, dx, dy){
+    
+    constructor(x, y, colour, dimensions, direction, ctx){
         this.x = x;
         this.y = y;
         this.colour = colour;
