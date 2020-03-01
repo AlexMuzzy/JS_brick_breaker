@@ -109,11 +109,18 @@ function drawScore() {
 function drawBricks() {
     if (brick_object.direction.live){
         brick_object.square_object_draw();
-    }
-    if (brick_object.hasCollidedBottomSide(ball_object.x, ball_object.y)){
-        brick_object.direction.live = false;
-        brick_object.direction.dx = -brick_object.direction.dx;
-        brick_object.direction.dy = -brick_object.direction.dy;
+    
+    
+        if (brick_object.hasCollidedBottomSide(ball_object.x, ball_object.y) || brick_object.hasCollidedTopSide(ball_object.x, ball_object.y)){
+            brick_object.direction.live = false;
+            //ball_object.direction.dx = -ball_object.direction.dx;
+            ball_object.direction.dy = -ball_object.direction.dy;
+        }
+
+        if(brick_object.hasCollidedRightSide(ball_object.x, ball_object.y) || brick_object.hasCollidedLeftSide(ball_object.x, ball_object.y)){
+            brick_object.direction.live = false;
+            ball_object.direction.dx = -ball_object.direction.dx;
+        }
     }
 }
 

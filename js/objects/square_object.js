@@ -41,7 +41,7 @@ export default class square extends object {
  * @param {Number} y Coordinate for object tested for collision.
  */
     hasCollidedTopSide (x, y) {
-        if (y > this.y) {
+        if (y == this.y) {
             if (x > this.x && x < this.x + this.dimensions.width) {
                 return true;
             }
@@ -56,7 +56,7 @@ export default class square extends object {
  * @param {Number} y Coordinate for object tested for collision.
  */
     hasCollidedBottomSide (x, y) {
-        if (y > this.y + this.dimensions.height) {
+        if (y == this.y + this.dimensions.height) {
             if (x > this.x && x < this.x + this.dimensions.width) {
                 return true;
             }
@@ -71,7 +71,7 @@ export default class square extends object {
  * @param {Number} y Coordinate for object tested for collision.
  */
     hasCollidedLeftSide (x, y) {
-        if (x > this.x){
+        if (x == this.x){
             if (y > this.y && y < this.y + this.dimensions.height) {
                 return true;
             }
@@ -86,7 +86,7 @@ export default class square extends object {
  * @param {Number} y Coordinate for object tested for collision.
  */
     hasCollidedRightSide (x, y) {
-        if (x > this.x + this.dimensions.width){
+        if (x == this.x + this.dimensions.width){
             if (y > this.y && y < this.y + this.dimensions.height) {
                 return true;
             }
